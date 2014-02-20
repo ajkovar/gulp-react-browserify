@@ -89,7 +89,7 @@ gulp.task('watch', function () {
         };
 
         // Watch .html files
-        gulp.watch('app/*.html');
+        gulp.watch('app/*.html', ['html']);
 
         // Watch .scss files
         gulp.watch('app/styles/**/*.scss', ['styles']);
