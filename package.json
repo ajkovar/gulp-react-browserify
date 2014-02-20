@@ -18,7 +18,9 @@
     "gulp-cache": "~0.1.1",
     "gulp-ruby-sass": "~0.3.0",
     "gulp-size": "~0.1.2",
-    "gulp-less": "~1.2.1"
+    "gulp-less": "~1.2.1",
+    "connect-livereload": "~0.3.2",
+    "connect": "~2.13.0"
   },
   "engines": {
     "node": ">=0.10.0"

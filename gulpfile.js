@@ -18,6 +18,8 @@ var livereload = require('gulp-livereload');
 var lr = require('tiny-lr');
 var server = lr();
 
+var appDir = "app/"
+
 // Styles
 gulp.task('styles', function () {
     return gulp.src('app/styles/main.less')
@@ -98,4 +100,14 @@ gulp.task('watch', function () {
         // Watch image files
         gulp.watch('app/images/**/*', ['images']);
     });
+    var connect = require('connect');
+    var http = require('http');
+
+    var app = connect()
+            .use(require('connect-livereload')({
+                port: 35729
+            }))
+            .use(connect.static(appDir));
+
+    http.createServer(app).listen(3000);
 });
