@@ -7,7 +7,7 @@ module.exports = {
         this.getBackboneObject().off("all", this._boundForceUpdate);
     },
     getBackboneObject: function() {
-        return this.props.collection || this.props.model || this.state.model;
+        return this.props.collection || this.props.model || this.state.model || this.state.collection;
     },
     linkState: function(key) {
         var Link = function(value, requestChange){

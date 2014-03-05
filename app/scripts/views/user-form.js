@@ -38,7 +38,7 @@ module.exports = React.createClass({
                 <label>Email</label>
                 <input className="form-control" checkedLink={this.linkState('admin')} type="checkbox" name="email"></input>
             </div>
-            <button onClick={this.submitForm}>Submit</button>
+            <button className="btn btn-primary" onClick={this.submitForm}>Submit</button>
         </form>
       );
     }

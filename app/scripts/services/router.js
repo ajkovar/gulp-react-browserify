@@ -10,8 +10,6 @@ Router.prototype = {
     addRoute: function(route, Component){
         var self = this;
         this._router.route(route, route, function(){
-            console.log( arguments );
-
             var routeParams= Array.prototype.slice.call(arguments, 0);
             React.renderComponent(
                 Component({ 
