@@ -49,10 +49,9 @@ gulp.task('scripts', function () {
     //     .pipe(gulp.dest('dist/scripts'));
     return gulp.src(["./app/scripts/main.js"])
         .pipe(browserify({
-            sourceMap: true,
+            debug:true,
             transform: ["reactify"]
         }))
-        .pipe(concat("main.js"))
         .pipe(livereload(server))
         .pipe(gulp.dest("dist/scripts"));
 });
