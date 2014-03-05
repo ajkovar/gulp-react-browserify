@@ -2,6 +2,9 @@
   "name": "gulp-react-require",
   "version": "0.0.0",
   "dependencies": {
+    "backbone": "~1.1.2",
+    "jquery": "~2.1.0",
+    "underscore": "~1.6.0"
   },
   "devDependencies": {
     "gulp": "~3.5.0",
@@ -20,7 +23,15 @@
     "gulp-size": "~0.1.2",
     "gulp-less": "~1.2.1",
     "connect-livereload": "~0.3.2",
-    "connect": "~2.13.0"
+    "connect": "~2.13.0",
+    "brfs": "~0.2.1",
+    "reactify": "~0.8.1",
+    "connect-route": "~0.1.4",
+    "express": "~3.4.8",
+    "browserify": "~3.30.2",
+    "gulp-browserify": "~0.4.6",
+    "envify": "~1.2.0",
+    "react": "~0.9.0"
   },
   "engines": {
     "node": ">=0.10.0"

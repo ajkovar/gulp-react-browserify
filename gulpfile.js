@@ -17,8 +17,11 @@ var size = require('gulp-size');
 var livereload = require('gulp-livereload');
 var lr = require('tiny-lr');
 var server = lr();
+var source = require('vinyl-source-stream');
+var browserify = require('gulp-browserify');
+var connectRoute = require('connect-route');
 
-var appDir = "app/"
+var appDir = "./app/"
 
 // Styles
 gulp.task('styles', function () {
@@ -36,14 +39,22 @@ gulp.task('styles', function () {
 
 // Scripts
 gulp.task('scripts', function () {
-    return gulp.src('app/scripts/**/*.js')
-        .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter('default'))
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest('dist/scripts'))
-        .pipe(uglify())
+    // return gulp.src('app/scripts/**/*.js')
+    //     .pipe(jshint('.jshintrc'))
+    //     .pipe(jshint.reporter('default'))
+    //     .pipe(concat('main.js'))
+    //     .pipe(gulp.dest('dist/scripts'))
+    //     .pipe(uglify())
+    //     .pipe(livereload(server))
+    //     .pipe(gulp.dest('dist/scripts'));
+    return gulp.src(["./app/scripts/main.js"])
+        .pipe(browserify({
+            sourceMap: true,
+            transform: ["reactify"]
+        }))
+        .pipe(concat("main.js"))
         .pipe(livereload(server))
-        .pipe(gulp.dest('dist/scripts'));
+        .pipe(gulp.dest("dist/scripts"));
 });
 
 // HTML
@@ -81,12 +92,32 @@ gulp.task('default', ['clean'], function () {
 });
 
 // Watch
-gulp.task('watch', function () {
-    // Listen on port 35729
-    server.listen(35729, function (err) {
+gulp.task('watch', ['build'], function () {
+    // var bundler = watchify(appDir+'scripts/main.js');
+
+    // // Optionally, you can apply transforms
+    // // and other configuration options on the
+    // // bundler just as you would with browserify
+    // bundler.transform('brfs')
+
+    // bundler.on('update', rebundle)
+
+    // function rebundle () {
+    //     return bundler.bundle()
+    //         .pipe(source('bundle.js'))
+    //         .pipe(gulp.dest('./dist'))
+    // }
+
+    // rebundle()
+
+    // Listen on port 35730
+    server.listen(35730, function (err) {
         if (err) {
             return console.error(err);
         };
+        
+        gulp.src('./app/bower_components/**')
+            .pipe(gulp.dest('./dist/bower_components/'));
 
         // Watch .html files
         gulp.watch('app/*.html', ['html']);
@@ -105,9 +136,9 @@ gulp.task('watch', function () {
 
     var app = connect()
             .use(require('connect-livereload')({
-                port: 35729
+                port: 35730
             }))
-            .use(connect.static(appDir));
+            .use(connect.static("./dist"));
 
     http.createServer(app).listen(3000);
 });
